@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CVKeyboard"
+             mc:Ignorable="d"
+             x:Class="CVKeyboard.MainPage">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single" SelectedItem="{Binding SelectedItem}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Text}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Path=DisplayDetailCommand, Source={RelativeSource AncestorType={x:Type local:ViewModel}}}"
+                                CommandParameter="{Binding .}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <StackLayout Grid.Row="1" Margin="5">
+
+            <Label Text="Current Selection:"/>
+            <Label BindingContext="{Binding SelectedItem}" Text="{Binding Text}"></Label>
+
+        </StackLayout>
+
+    </Grid>
+</ContentPage>
